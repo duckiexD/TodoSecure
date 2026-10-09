@@ -1,0 +1,29 @@
+@page
+@model TodoSecure.Pages.Tasks.EditModel
+@{ ViewData["Title"] = "Редактирование задачи"; }
+
+<h2>Редактирование задачи</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Input.Id" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div>
+        <label asp-for="Input.Title">Заголовок</label>
+        <input asp-for="Input.Title" />
+        <span asp-validation-for="Input.Title" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Input.Description">Описание</label>
+        <textarea asp-for="Input.Description" rows="4"></textarea>
+    </div>
+
+    <div>
+        <input asp-for="Input.IsCompleted" />
+        <label asp-for="Input.IsCompleted">Выполнено</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-page="Index" class="btn btn-outline-secondary">Отмена</a>
+</form>

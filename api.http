@@ -1,0 +1,29 @@
+@host = https://localhost:7000
+@token = ВСТАВЬ_СЮДА_ТОКЕН
+
+### Логин — получить JWT
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@todo.com",
+  "password": "Admin123!"
+}
+
+### Получить задачи с токеном
+GET {{host}}/api/tasks
+Authorization: Bearer {{token}}
+
+### Создать задачу с токеном
+POST {{host}}/api/tasks
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Купить хлеб",
+  "description": "И молоко",
+  "isCompleted": false
+}
+
+### Получить задачи БЕЗ токена — должен быть 401
+GET {{host}}/api/tasks

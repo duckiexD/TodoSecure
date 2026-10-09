@@ -1,0 +1,40 @@
+@page
+@model TodoSecure.Pages.Account.RegisterModel
+@{ ViewData["Title"] = "Регистрация"; }
+
+<h2>Регистрация</h2>
+
+@if (!string.IsNullOrEmpty(Model.Error))
+{
+    <div class="alert-danger">@Model.Error</div>
+}
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div>
+        <label asp-for="Input.Email">Email</label>
+        <input asp-for="Input.Email" />
+        <span asp-validation-for="Input.Email" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Input.FullName">Полное имя</label>
+        <input asp-for="Input.FullName" />
+        <span asp-validation-for="Input.FullName" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Input.Password">Пароль</label>
+        <input asp-for="Input.Password" />
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Input.ConfirmPassword">Повторите пароль</label>
+        <input asp-for="Input.ConfirmPassword" />
+        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+</form>

@@ -1,0 +1,25 @@
+@page
+@model TodoSecure.Pages.Admin.IndexModel
+@{ ViewData["Title"] = "Админ-панель"; }
+
+<h2>Админ-панель — пользователи</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Имя</th>
+            <th>Роли</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var (u, roles) in Model.Users)
+    {
+        <tr>
+            <td>@u.Email</td>
+            <td>@u.FullName</td>
+            <td>@string.Join(", ", roles)</td>
+        </tr>
+    }
+    </tbody>
+</table>

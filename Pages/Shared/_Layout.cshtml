@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TodoSecure</title>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" href="data:," />
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <a class="navbar-brand" asp-page="/Index">TodoSecure</a>
+                <ul>
+                    <li><a asp-page="/Index">Главная</a></li>
+                    <li><a asp-page="/Tasks/Index">Задачи</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        &copy; @DateTime.UtcNow.Year - TodoSecure
+    </footer>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,58 @@
+@page
+@model TodoSecure.Pages.Tasks.IndexModel
+@using Microsoft.AspNetCore.Antiforgery
+@inject IAntiforgery Antiforgery
+@{
+    ViewData["Title"] = "Задачи";
+    var csrfToken = Antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}
+
+<meta name="csrf-token" content="@csrfToken" />
+
+<h2>Задачи</h2>
+<p><a asp-page="Create" class="btn btn-primary">Создать задачу</a></p>
+
+@if (!Model.Tasks.Any())
+{
+    <p>Задач пока нет.</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Заголовок</th>
+                <th>Описание</th>
+                <th>Автор</th>
+                <th>Статус</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var t in Model.Tasks)
+        {
+            <tr>
+                <td>@t.Title</td>
+                <td>@t.Description</td>
+                <td>@t.User?.Email</td>
+                <td>@(t.IsCompleted ? "✔" : "—")</td>
+                <td>
+                    @if (Model.EditableIds.Contains(t.Id))
+                    {
+                        <a asp-page="Edit" asp-route-id="@t.Id" class="btn btn-sm btn-primary">Редактировать</a>
+                        <a asp-page="Delete" asp-route-id="@t.Id" class="btn btn-sm btn-danger">Удалить</a>
+                        @if (!t.IsCompleted)
+                        {
+                            <button class="btn btn-sm btn-outline-secondary mark-done" data-id="@t.Id">Отметить выполненной</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@section Scripts {
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}
